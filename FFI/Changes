@@ -15,3 +15,13 @@ Revision history for Perl extension FFI.
 	- Implemented workaround for DynaLoader problems on ActiveState
 	  binary build
 	- Set version to 1.00, to reflect "final" status
+
+1.01  Thu Jun 19 22:04:59 2003
+	Installation improvements.
+	- FFI now uses the _installed_ ffcall libraries and headers,
+	  rather than those in the ./ffcall directory.
+	- Linux installation now works.
+	- Fixed two warnings in FFI.xs.
+	- Replaced the old ./ffcall contents with the current ffcall-1.8.
+	- t/basic.t now uses Test, and win32.t was tweaked.  Hopefully the
+	  automated module testers will now be happier.

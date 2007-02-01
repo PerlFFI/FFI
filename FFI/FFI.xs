@@ -2,8 +2,8 @@
 #include "perl.h"
 #include "XSUB.h"
 
-#include "avcall/avcall.h"
-#include "callback/callback.h"
+#include <avcall.h>
+#include <callback.h>
 
 typedef union
 {
@@ -281,9 +281,9 @@ PREINIT:
     callback_data *data;
 PPCODE:
     cb = SvIV(SvRV(self));
-    data = (callback_data*)callback_data(cb);
+    data = (callback_data*)callback_data((void*)cb);
     SvREFCNT_dec(data->code);
     Safefree(data);
-    free_callback(cb);
+    free_callback((void*)cb);
 
 MODULE = FFI            PACKAGE = FFI

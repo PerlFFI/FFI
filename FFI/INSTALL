@@ -1,19 +1,38 @@
-First, build the ffcall package. For full details, see the README files in the
-ffcall subdirectory. The basic process on Unix is
 
-    cd ffcall
-    ./configure
-    make
-    make check
+(1) Install the ffcall library, if you do not already have it installed.
 
-and on Windows it is
+If it is already installed, you will have, for example, an "avcall"
+library, man page, and avcall.h header.  You can skip to step 2, and
+if ffcall is not installed, you will be given an obvious error message.
 
-    cd ffcall
-    nmake -f Makefile.msvc
+ffcall is available from http://www.haible.de/bruno/packages-ffcall.html
+and various other places.  Several platforms have their own distributions.
 
-For platforms supported by the ffcall package, see ffcall/PLATFORMS
+There is also a copy of ffcall in the ffcall subdirectory.  It is
+known to work with FFI, but it may be old.  It is included only so you
+have everything you need here, without searching.  But you may be
+better off getting the current version.
 
-Now, build the FFI package in the usual manner.
+   To use the version of ffcall in the ffcall subdirectory,
+   see the README files there.  The basic process on Unix is
+
+       cd ffcall-1.8
+       ./configure
+       make
+       make check
+       make install
+
+   and on Windows it is
+
+       cd ffcall-1.8
+       nmake -f Makefile.msvc
+       nmake -f Makefile.msvc check
+       nmake -f Makefile.msvc install
+
+   For platforms supported by the ffcall package, see ffcall/PLATFORMS
+
+
+(2) Now, build the FFI package in the usual manner.
 
    perl Makefile.PL
    make
