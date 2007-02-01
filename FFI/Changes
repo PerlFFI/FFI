@@ -1,0 +1,17 @@
+Revision history for Perl extension FFI.
+
+0.01  Fri Sep 24 13:06:36 1999
+	- original version; created by h2xs 1.19
+
+0.02
+0.03
+0.04
+0.05	- Many highly experimental versions experimenting with alternative
+	  formats for function signatures, etc. None provided significant
+          improvements in functionality.
+
+1.00  Tue Oct 31 14:47:45 2000
+	- Tidied up
+	- Implemented workaround for DynaLoader problems on ActiveState
+	  binary build
+	- Set version to 1.00, to reflect "final" status

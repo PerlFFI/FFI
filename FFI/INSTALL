@@ -1,0 +1,27 @@
+First, build the ffcall package. For full details, see the README files in the
+ffcall subdirectory. The basic process on Unix is
+
+    cd ffcall
+    ./configure
+    make
+    make check
+
+and on Windows it is
+
+    cd ffcall
+    nmake -f Makefile.msvc
+
+For platforms supported by the ffcall package, see ffcall/PLATFORMS
+
+Now, build the FFI package in the usual manner.
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+See the pod documentation for details of usage.
+
+Note that the test suite needs some work, to standardise it. Also, there are a
+number of Win32-specific tests which should be extracted into a separate
+file...
