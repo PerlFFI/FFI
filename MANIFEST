@@ -1,0 +1,11 @@
+MANIFEST
+README
+INSTALL
+Changes
+TODO
+FFI.pm
+Library.pm
+FFI.xs
+Makefile.PL
+t/basic.t
+t/win32.t

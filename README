@@ -1,0 +1,22 @@
+The FFI and FFI::Library modules implement a foreign function interface for
+Perl, version 5.005_03 and above. (The modules almost certainly work with
+earlier versions of Perl, but I do not have access to such versions to test
+them).
+
+The foreign function interface allows Perl code to directly call C functions
+exported from shared libraries (DLLs on Windows, .so files on Unix). It also
+allows a Perl subroutine to be packaged as a function which can be passed to
+an external C routine ("callbacks").
+
+There are two modules in the package:
+
+    * FFI is a low-level interface, providing two functions, call() and
+      callback(). The call() routine expects to be passed a "raw" function
+      address, but the module provides no way of creating such an address.
+      That is left to other modules.
+    * FFI::Library encapsulates the concept of a shared library. It offers
+      functions to load a library (and to automatically unload it when it is
+      no longer required), and to extract functions from the library, in a
+      form suitable for calling from Perl.
+
+See the file INSTALL for installation details.
