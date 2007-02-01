@@ -8,7 +8,6 @@ WriteMakefile(
     'PM'        => { 'FFI.pm' => '$(INST_LIBDIR)/FFI.pm',
                      'Library.pm' => '$(INST_LIBDIR)/FFI/Library.pm',
 		   },
-    'LIBS'      => ['ffcall/avcall/avcall.lib ffcall/callback/callback.lib'],
+    'LIBS'      => ['-lavcall -lcallback'],
     'DEFINE'    => ($^O eq "MSWin32" ? '-DWIN32' : ''),
-    'INC'       => '-Iffcall',
 );

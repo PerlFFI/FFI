@@ -1,5 +1,6 @@
 if ($^O ne "MSWin32") {
-    print "1..0\n";
+    print "1..1\n";
+    print "ok 1\n";
     exit 0;
 }
 
