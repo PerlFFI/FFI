@@ -1,60 +1,44 @@
-if ($^O ne "MSWin32") {
-    print "1..1\n";
-    print "ok 1\n";
-    exit 0;
-}
+#perl -w
 
-print "1..12\n";
+use Test::More;
+
+if ($^O ne "MSWin32") {
+    plan skip_all => 'Windows specific tests';
+} else {
+    plan tests => 12;
+}
 
 use Cwd;
 use FFI;
 use FFI::Library;
 
-$kernel32 = FFI::Library->new("kernel32") or print "not ";
-print "ok 1\n";
-$user32 = FFI::Library->new("user32") or print "not ";
-print "ok 2\n";
+ok $kernel32 = FFI::Library->new("kernel32");
+ok $user32   = FFI::Library->new("user32");
 
-$GetCurrentDirectory = $kernel32->function('GetCurrentDirectoryA', 'sIIp')
-    or print "not ";
-print "ok 3\n";
-
-$GetWindowsDirectory = $kernel32->function('GetWindowsDirectoryA', 'sIpI')
-    or print "not ";
-print "ok 4\n";
-
-$GetModuleHandle = $kernel32->function('GetModuleHandleA', 'sII')
-    or print "not ";
-print "ok 5\n";
-
-$GetModuleFileName = $kernel32->function('GetModuleFileNameA', 'sIIpI')
-    or print "not ";
-print "ok 6\n";
+ok $GetCurrentDirectory = $kernel32->function('GetCurrentDirectoryA', 'sIIp');
+ok $GetWindowsDirectory = $kernel32->function('GetWindowsDirectoryA', 'sIpI');
+ok $GetModuleHandle     = $kernel32->function('GetModuleHandleA', 'sII');
+ok $GetModuleFileName   = $kernel32->function('GetModuleFileNameA', 'sIIpI');
 
 $d = ' ' x 200;
 $n = $GetCurrentDirectory->(200, $d);
 $d = substr($d, 0, $n);
 
 ($cwd = cwd) =~ s#/#\\#g;
-$d eq $cwd or print "not ";
-print "ok 7\n";
+is $d, $cwd;
 
 $d = ' ' x 200;
 $n = $GetWindowsDirectory->($d, 200);
 $d = substr($d, 0, $n);
 
--d $d or print "not ";
-print "ok 8\n";
+ok -d $d;
 
-$h = $GetModuleHandle->(0);
-print "not " unless $h;
-print "ok 9\n";
+ok $h = $GetModuleHandle->(0);
 
 $d = ' ' x 200;
 $n = $GetModuleFileName->($h, $d, 200);
 $d = substr($d, 0, $n);
-print "not " unless $d eq $^X;
-print "ok 10\n";
+is $d, $^X;
 
 $EnumWindows = $user32->function("EnumWindows", 'sIII');
 
@@ -70,7 +54,5 @@ $cb = FFI::callback('sIII', sub {
 });
 
 $EnumWindows->($cb->addr(), 12);
-print "not " unless $callback_ok;
-print "ok 11\n";
-print "not " unless $window_count > 0;
-print "ok 12\n";
+ok $callback_ok;
+ok $window_count > 0;
