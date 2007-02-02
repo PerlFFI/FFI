@@ -53,6 +53,9 @@ main(int argv, char ** argc) {
 
         http://directory.fsf.org/ffcall.html
 
+    Alternatively, your OS vendor may have makde packages available for you.
+    See INSTALL for suggested package names.
+
     The compilation error messages are available at $probe.err .
 
 .
