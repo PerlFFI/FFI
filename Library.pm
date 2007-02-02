@@ -5,7 +5,7 @@ use Carp;
 use vars qw($VERSION);
 use FFI;
 
-$VERSION = '1.00';
+$VERSION = '1.02';
 
 if ($^O eq 'MSWin32') {
     require Win32;
@@ -93,9 +93,20 @@ This module can be distributed under the same terms as Perl. However, as it
 depends on the L<FFI> module, please note the licensing terms for the FFI
 code.
 
+=head1 STATUS
+
+This is a maintenance release. We will be releasing an updated but
+incompatible 2.00 version shortly.
+
 =head1 AUTHOR
 
-Paul Moore, gustav@morpheus.demon.co.uk
+Paul Moore, C<< <gustav@morpheus.demon.co.uk> >> is the original author
+of L<FFI>.
+
+Mitchell Charity C<< <mcharity@vendian.org> >> contributed fixes.
+
+Anatoly Vorobey C<< <avorobey@pobox.com> >> and Gaal Yahas C<<
+<gaal@forum2.org> >> are the current maintainers.
 
 =head1 SEE ALSO
 

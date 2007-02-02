@@ -25,3 +25,8 @@ Revision history for Perl extension FFI.
 	- Replaced the old ./ffcall contents with the current ffcall-1.8.
 	- t/basic.t now uses Test, and win32.t was tweaked.  Hopefully the
 	  automated module testers will now be happier.
+
+1.02  Fri Feb 02 11:22:59 2007 [wip]
+    Maintenance release.
+    - Probe for a system ffcall instead of bundling one.
+
