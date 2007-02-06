@@ -1,7 +1,7 @@
 use ExtUtils::MakeMaker;
 
 use 5.006;
-use File::Temp;
+use Cwd;
 
 my @ffcall_opts = find_ffcall();
 my $probe = "ffcall-probe";
@@ -28,8 +28,9 @@ sub find_ffcall {
 
     # Always use bundled ffcall binaries on Windows.
     if ($^O eq 'MSWin32') {
+        my $cwd = cwd;
         return (
-            LIBS => ["-Lwin32/lib $libs"],
+            LIBS => ["-L$cwd/win32/lib $libs"],
             CCFLAGS => '-Iwin32/include',
         );
     }
