@@ -3,8 +3,8 @@ use ExtUtils::MakeMaker;
 use 5.006;
 use Cwd;
 
-my @ffcall_opts = find_ffcall();
 my $probe = "ffcall-probe";
+my @ffcall_opts = find_ffcall();
 
 WriteMakefile(
     'NAME'      => 'FFI',
@@ -71,5 +71,5 @@ main(int argv, char ** argc) {
     
     unlink "$probe.$_" for qw(c o exe err);
 
-    return (LIBS => ["-Lwin32/lib $libs"]);
+    return (LIBS => [$libs]);
 }
