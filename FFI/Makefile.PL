@@ -3,10 +3,8 @@ use ExtUtils::MakeMaker;
 use 5.006;
 use File::Temp;
 
-our $LIBS = '-lavcall -lcallback';
+my @ffcall_opts = find_ffcall();
 my $probe = "ffcall-probe";
-
-assert_ffcall();
 
 WriteMakefile(
     'NAME'      => 'FFI',
@@ -16,16 +14,26 @@ WriteMakefile(
     'PM'        => { 'FFI.pm' => '$(INST_LIBDIR)/FFI.pm',
                      'Library.pm' => '$(INST_LIBDIR)/FFI/Library.pm',
 		   },
-    'LIBS'      => [$LIBS],
     'DEFINE'    => ($^O eq "MSWin32" ? '-DWIN32' : ''),
-    'clean'     => { FILES => "$probe.*" },
+    'clean'     => { FILES => "$probe.* vc*.pdb FFI.obj FFI.o FFI_def.old" },
+    @ffcall_opts,
 );
 
 exit 0;
 
 ########################################################################
 
-sub assert_ffcall {
+sub find_ffcall {
+    my $libs = '-lavcall -lcallback';
+
+    # Always use bundled ffcall binaries on Windows.
+    if ($^O eq 'MSWin32') {
+        return (
+            LIBS => ["-Lwin32/lib $libs"],
+            CCFLAGS => '-Iwin32/include',
+        );
+    }
+
     open my $fh, ">", "$probe.c" or die "open: $!";
     print $fh <<'.';
 #include <avcall.h>
@@ -46,8 +54,8 @@ main(int argv, char ** argc) {
     require ExtUtils::MM;
     my $mm = MM->new({NAME => 'FFI'});
 
-    print "$mm->{CC} $LIBS $probe.c 2> $probe.err\n";
-    system "$mm->{CC} $LIBS -o $probe.exe $probe.c 2> $probe.err" and die << ".";
+    print "$mm->{CC} $libs $probe.c 2> $probe.err\n";
+    system "$mm->{CC} $libs -o $probe.exe $probe.c 2> $probe.err" and die << ".";
 *** ffcall probe compilation failed. Do you have the ffcall library (and
     its development files) installed? If not, you can fetch it at:
 
@@ -61,4 +69,6 @@ main(int argv, char ** argc) {
 .
     
     unlink "$probe.$_" for qw(c o exe err);
+
+    return (LIBS => ["-Lwin32/lib $libs"]);
 }
