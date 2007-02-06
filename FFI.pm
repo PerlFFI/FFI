@@ -139,7 +139,7 @@ Possibly, improve support for passing pointers to "native" types.
 =head1 LICENSE
 
 Substantial portions of the code for this module (the underlying FFI code) are
-licensed under the Gnu General Public License. Under the terms of that
+licensed under the GNU General Public License. Under the terms of that
 license, my understanding is that this module has to be distrubuted under that
 same license.
 
@@ -164,7 +164,8 @@ Anatoly Vorobey C<< <avorobey@pobox.com> >> and Gaal Yahas C<<
 
 =head1 SEE ALSO
 
-http://clisp.cons.org/~haible/clisp.html
+L<http://directory.fsf.org/ffcall.html>
+
 Bruno Haible's CLisp Common Lisp implementation, from which the underlying
 foreign function interface code was taken.
 
