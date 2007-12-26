@@ -37,9 +37,7 @@ sub find_ffcall {
 
     open my $fh, ">", "$probe.c" or die "open: $!";
     print $fh <<'.';
-#include <avcall.h>
 #include <callback.h>
-#include <trampoline_r.h>
 
 int
 main(int argv, char ** argc) {
@@ -56,7 +54,7 @@ main(int argv, char ** argc) {
     my $mm = MM->new({NAME => 'FFI'});
 
     print "$mm->{CC} $libs $probe.c 2> $probe.err\n";
-    system "$mm->{CC} $libs -o $probe.exe $probe.c 2> $probe.err" and die << ".";
+    system "$mm->{CC} $probe.c $libs -o $probe.exe 2> $probe.err" and die << ".";
 *** ffcall probe compilation failed. Do you have the ffcall library (and
     its development files) installed? If not, you can fetch it at:
 
@@ -68,7 +66,7 @@ main(int argv, char ** argc) {
     The compilation error messages are available at $probe.err .
 
 .
-    
+
     unlink "$probe.$_" for qw(c o exe err);
 
     return (LIBS => [$libs]);

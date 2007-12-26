@@ -7,7 +7,7 @@ use vars qw($VERSION @ISA);
 require DynaLoader;
 
 @ISA = qw(DynaLoader);
-$VERSION = '1.02';
+$VERSION = '1.03';
 
 bootstrap FFI $VERSION;
 
@@ -152,12 +152,15 @@ of the FFI code.
 This is a maintenance release. We will be releasing an updated but
 incompatible 2.00 version shortly.
 
+Subversion repository: L<http://svn.openfoundry.org/perlffi/trunk/>
+
 =head1 AUTHOR
 
 Paul Moore, C<< <gustav@morpheus.demon.co.uk> >> is the original author
 of L<FFI>.
 
-Mitchell Charity C<< <mcharity@vendian.org> >> contributed fixes.
+Mitchell Charity C<< <mcharity@vendian.org> >> and
+Reini Urban C<< <RURBAN@cpan.org> >> contributed fixes.
 
 Anatoly Vorobey C<< <avorobey@pobox.com> >> and Gaal Yahas C<<
 <gaal@forum2.org> >> are the current maintainers.

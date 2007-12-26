@@ -2,7 +2,7 @@
 
 use Test::More;
 
-if ($^O ne "MSWin32") {
+if ($^O ne "MSWin32" and $^O ne "cygwin") {
     plan skip_all => 'Windows specific tests';
 } else {
     plan tests => 12;
@@ -25,6 +25,7 @@ $n = $GetCurrentDirectory->(200, $d);
 $d = substr($d, 0, $n);
 
 ($cwd = cwd) =~ s#/#\\#g;
+$cwd = Win32::GetCwd() if $^O eq "cygwin";
 is $d, $cwd;
 
 $d = ' ' x 200;
@@ -38,7 +39,8 @@ ok $h = $GetModuleHandle->(0);
 $d = ' ' x 200;
 $n = $GetModuleFileName->($h, $d, 200);
 $d = substr($d, 0, $n);
-is $d, $^X;
+$exp = $^O eq "MSWin32" ? $^X : Cygwin::posix_to_win_path($^X);
+is $d, $exp;
 
 $EnumWindows = $user32->function("EnumWindows", 'sIII');
 
