@@ -32,3 +32,7 @@ Revision history for Perl extension FFI.
     - For Windows, bundle prebuilt ffcall-1.10 libs. (Works with
       Strawberry Perl and MSVC-built perls, including ActivePerl.)
 
+1.03  2007-12-26
+    Maintenance release.
+    - Fix build on cygwin (Thanks Reini Urban). Closes #31913.
+

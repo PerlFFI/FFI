@@ -40,7 +40,8 @@ sub address {
 
 use vars qw($libc $libm);
 if ($^O eq 'MSWin32') {
-    $libc = load("MSVCRT40") || load("MSVCRT20");
+    $libc = load("MSVCRT80") || load("MSVCRT71") || load("MSVCRT70") ||
+	    load("MSVCRT60") || load("MSVCRT40") || load("MSVCRT20");
     $libm = $libc;
 }
 else {
@@ -51,6 +52,10 @@ else {
             # unintelligible to dlopen().
             $libc = load("libc.so.6");
         }
+        elsif ($^O eq "cygwin") {
+	  $libc = load("cygwin1.dll");
+	  $libm = $libc;
+	}
     }
     if (!$libc) {
         die "Can't load -lc: ", DynaLoader::dl_error(), "\nGiving up.\n";
