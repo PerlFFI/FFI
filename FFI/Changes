@@ -36,3 +36,6 @@ Revision history for Perl extension FFI.
     Maintenance release.
     - Fix build on cygwin (Thanks Reini Urban). Closes #31913.
 
+1.04  2008-09-06
+    Maintenance release.
+    - Avoid CPAN testers emails when libffi is not installed.
