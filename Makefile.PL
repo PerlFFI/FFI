@@ -54,7 +54,8 @@ main(int argv, char ** argc) {
     my $mm = MM->new({NAME => 'FFI'});
 
     print "$mm->{CC} $libs $probe.c 2> $probe.err\n";
-    system "$mm->{CC} $probe.c $libs -o $probe.exe 2> $probe.err" and die << ".";
+    if (system "$mm->{CC} $probe.c $libs -o $probe.exe 2> $probe.err") {
+        print << ".";
 *** ffcall probe compilation failed. Do you have the ffcall library (and
     its development files) installed? If not, you can fetch it at:
 
@@ -66,6 +67,11 @@ main(int argv, char ** argc) {
     The compilation error messages are available at $probe.err .
 
 .
+        # According to http://cpantest.grango.org/wiki/CPANAuthorNotes, this
+        # is the preferred method of failing when library dependencies are
+        # not met, so that CPAN testers do not send spurious error reports.
+        exit 0;
+    }
 
     unlink "$probe.$_" for qw(c o exe err);
 
