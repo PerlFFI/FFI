@@ -168,7 +168,7 @@ MODULE = FFI            PACKAGE = FFI
 
 void
 call(addr, sig, ...)
-    int addr;
+    void *addr;
     char *sig;
 
     PREINIT:
