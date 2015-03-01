@@ -78,6 +78,9 @@ This module provides access from Perl to functions exported from dynamically
 linked libraries. Functions are described by C<signatures>, for details of
 which see the L<FFI> module's documentation.
 
+Newer FFI modules such as L<FFI::Platypus> and L<FFI::Raw> provide more
+functionality and should probably be considered for new projects.
+
 =head1 EXAMPLES
 
     $clib_file = ($^O eq "MSWin32") ? "MSVCRT40.DLL" : "-lc";
@@ -85,18 +88,35 @@ which see the L<FFI> module's documentation.
     $strlen = $clib->function("strlen", "cIp");
     $n = $strlen->($my_string);
 
-=head1 TODO
+=head1 SUPPORT
 
-=head1 LICENSE
+Please open any support tickets with this project's GitHub repository 
+here:
 
-This module can be distributed under the same terms as Perl. However, as it
-depends on the L<FFI> module, please note the licensing terms for the FFI
-code.
+L<https://github.com/plicease/FFI/issues>
 
-=head1 STATUS
+=head1 SEE ALSO
 
-This is a maintenance release. We will be releasing an updated but
-incompatible 2.00 version shortly.
+=over 4
+
+=item L<FFI>
+
+Low level interface to ffcall that this module is based on
+
+=item L<FFI::CheckLib>
+
+Portable functions for finding libraries.
+
+=item L<FFI::Platypus>
+
+Platypus is another FFI interface based on libffi.  It has a more
+extensive feature set, and libffi has a less restrictive license.
+
+=item L<FFI::Raw>
+
+Another FFI interface based on libffi.
+
+=cut
 
 =head1 AUTHOR
 
@@ -108,8 +128,13 @@ Mitchell Charity C<< <mcharity@vendian.org> >> contributed fixes.
 Anatoly Vorobey C<< <avorobey@pobox.com> >> and Gaal Yahas C<<
 <gaal@forum2.org> >> are the current maintainers.
 
-=head1 SEE ALSO
+Graham Ollis C<< <plicease@cpan.org >> is the current maintainer
 
-The L<FFI> module.
+=head1 LICENSE
+
+This software is copyright (c) 1999 by Paul Moore.
+
+This is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License
 
 =cut
