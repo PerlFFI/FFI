@@ -16,6 +16,16 @@ WriteMakefile(
 		   },
     'DEFINE'    => ($^O eq "MSWin32" ? '-DWIN32' : ''),
     'clean'     => { FILES => "$probe.* vc*.pdb FFI.obj FFI.o FFI_def.old" },
+    'META_MERGE' => {
+        'meta-spec' => { version => 2 },
+        'resources' => {
+            'repository' => {
+                'type' => 'git',
+                'url'  => 'https://github.com/plicease/FFI.git',
+                'web'  => 'https://github.com/plicease/FFI',
+            },
+        },
+    },
     @ffcall_opts,
 );
 
