@@ -74,7 +74,7 @@ main(int argv, char ** argc) {
 *** ffcall probe compilation failed. Do you have the ffcall library (and
     its development files) installed? If not, you can fetch it at:
 
-        http://directory.fsf.org/ffcall.html
+        http://directory.fsf.org/wiki/Libffcall
 
     Alternatively, your OS vendor may have made packages available for you.
     See INSTALL for suggested package names.

@@ -5,7 +5,7 @@ If it is already installed, you will have, for example, an "avcall"
 library, man page, and avcall.h header.  You can skip to step 2, and
 if ffcall is not installed, you will be given an obvious error message.
 
-ffcall is available from http://directory.fsf.org/ffcall.html
+ffcall is available from http://directory.fsf.org/wiki/Libffcall
 and various other places.  Several platforms have their own distributions.
 
     debian: apt-get install libffcall1 libffcall1-dev

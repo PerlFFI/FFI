@@ -7,7 +7,7 @@ file in the top level FFI directory for the full text of the license.
 
 ffcall can be obtained at the following URL:
 
-    http://directory.fsf.org/ffcall.html
+    http://directory.fsf.org/wiki/Libffcall
 
 ffcall consists of four individual libraries, of which FFI.pm uses two,
 through FFI.xs: avcall and callback. Their header files and pre-built
