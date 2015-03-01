@@ -1,60 +1,52 @@
-#perl -w
-
+use strict;
+use warnings;
 use Test::More;
-
-if ($^O ne "MSWin32" and $^O ne "cygwin") {
-    plan skip_all => 'Windows specific tests';
-} else {
-    plan tests => 12;
-}
-
 use Cwd;
 use FFI;
 use FFI::Library;
 
-ok $kernel32 = FFI::Library->new("kernel32");
-ok $user32   = FFI::Library->new("user32");
+plan skip_all => 'Test requires Windows'
+  unless $^O =~ /^(MSWin32|cygwin)$/;
 
-ok $GetCurrentDirectory = $kernel32->function('GetCurrentDirectoryA', 'sIIp');
-ok $GetWindowsDirectory = $kernel32->function('GetWindowsDirectoryA', 'sIpI');
-ok $GetModuleHandle     = $kernel32->function('GetModuleHandleA', 'sII');
-ok $GetModuleFileName   = $kernel32->function('GetModuleFileNameA', 'sIIpI');
+plan tests => 10;
 
-$d = ' ' x 200;
-$n = $GetCurrentDirectory->(200, $d);
+my $kernel32 = FFI::Library->new("kernel32");
+my $user32   = FFI::Library->new("user32");
+
+ok $kernel32, 'FFI::Library.new(kernel32)';
+ok $user32, 'FFI::Library.new(user32)';
+
+my $GetCurrentDirectory = $kernel32->function('GetCurrentDirectoryA', 'sIIp');
+my $GetWindowsDirectory = $kernel32->function('GetWindowsDirectoryA', 'sIpI');
+my $GetModuleHandle     = $kernel32->function('GetModuleHandleA', 'sII');
+my $GetModuleFileName   = $kernel32->function('GetModuleFileNameA', 'sIIpI');
+
+ok $GetCurrentDirectory, 'function GetCurrentDirectoryA';
+ok $GetWindowsDirectory, 'function GetWindowsDirectoryA';
+ok $GetModuleHandle,     'function GetModuleHandleA';
+ok $GetModuleFileName,   'function GetModuleFileNameA';
+
+
+my $d = ' ' x 200;
+my $n = $GetCurrentDirectory->(200, $d);
 $d = substr($d, 0, $n);
 
-($cwd = cwd) =~ s#/#\\#g;
+(my $cwd = cwd) =~ s#/#\\#g;
 $cwd = Win32::GetCwd() if $^O eq "cygwin";
-is $d, $cwd;
+is $d, $cwd, "\$d=$cwd";
 
 $d = ' ' x 200;
 $n = $GetWindowsDirectory->($d, 200);
 $d = substr($d, 0, $n);
 
-ok -d $d;
+ok -d $d, "-d \$d";
 
-ok $h = $GetModuleHandle->(0);
+my $h = $GetModuleHandle->(0);
+ok $h, 'GetModuleHandle';
 
 $d = ' ' x 200;
 $n = $GetModuleFileName->($h, $d, 200);
 $d = substr($d, 0, $n);
-$exp = $^O eq "MSWin32" ? $^X : Cygwin::posix_to_win_path($^X);
-is $d, $exp;
-
-$EnumWindows = $user32->function("EnumWindows", 'sIII');
-
-$window_count = 0;
-$callback_ok = 1;
-
-# Callback
-$cb = FFI::callback('sIII', sub {
-    my ($hwnd, $lparam) = @_;
-    $callback_ok = 0 unless $lparam == 12;
-    ++$window_count;
-    1;
-});
-
-$EnumWindows->($cb->addr(), 12);
-ok $callback_ok;
-ok $window_count > 0;
+my $exp = $^O eq "MSWin32" ? $^X : Cygwin::posix_to_win_path($^X);
+$exp = quotemeta $exp;
+like $d, qr{^$exp(\.exe)?$}, "\$ like ^$exp";

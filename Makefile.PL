@@ -6,6 +6,7 @@ BEGIN {
 }
 
 use 5.008001;
+use Config;
 use ExtUtils::MakeMaker;
 use Cwd;
 
