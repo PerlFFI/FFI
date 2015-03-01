@@ -14,17 +14,17 @@ my $probe = "ffcall-probe";
 my @ffcall_opts = find_ffcall();
 
 WriteMakefile(
-  'NAME'           => 'FFI',
-  'AUTHOR'         => [ 'Graham Ollis <plicease@cpan.org>', 'Paul Moore <gustav@morpheus.demon.co.uk>' ],
-  'VERSION_FROM'   => 'lib/FFI.pm',
-  'ABSTRACT_FROM'  => 'lib/FFI.pm',
-  'LICENSE'        => 'gpl_2',
-  'DEFINE'         => ($^O eq "MSWin32" ? '-DWIN32' : ''),
-  MIN_PERL_VERSION => '5.008001',
-  'clean'         => {
+  'NAME'             => 'FFI',
+  'AUTHOR'           => [ 'Graham Ollis <plicease@cpan.org>', 'Paul Moore <gustav@morpheus.demon.co.uk>' ],
+  'VERSION_FROM'     => 'lib/FFI.pm',
+  'ABSTRACT_FROM'    => 'lib/FFI.pm',
+  'LICENSE'          => 'gpl_2',
+  'DEFINE'           => ($^O eq "MSWin32" ? '-DWIN32' : ''),
+  'MIN_PERL_VERSION' => '5.008001',
+  'clean'            => {
     'FILES' => "$probe.* vc*.pdb FFI.obj FFI.o FFI_def.old FFI-*",
   },
-  'META_MERGE' => {
+  'META_MERGE'       => {
     'meta-spec' => { version => 2 },
     'resources' => {
       'bugtracker' => {
@@ -47,15 +47,6 @@ exit 0;
 
 sub find_ffcall {
     my $libs = '-lavcall -lcallback';
-
-    # Always use bundled ffcall binaries on Windows.
-    if ($^O eq 'MSWin32') {
-        my $cwd = cwd;
-        return (
-            LIBS => ["-L$cwd/win32/lib $libs"],
-            CCFLAGS => '-Iwin32/include',
-        );
-    }
 
     open my $fh, ">", "$probe.c" or die "open: $!";
     print $fh <<'.';
