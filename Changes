@@ -1,5 +1,8 @@
 Revision history for Perl extension FFI.
 
+  - use DynaLoader::dl_find_symbol_anywhere if libc cannot
+    easily be guessed
+
 1.06  Sun Mar 1, 2015
   - Fixes for FreeBSD
   - Fixes for cygwin

@@ -15,6 +15,7 @@ else {
 
 sub load {
     my $name = shift;
+    return if $name eq '-';
     return Win32::LoadLibrary($name) if $^O eq 'MSWin32';
 
     my $so = $name;
@@ -35,6 +36,9 @@ sub unload {
 sub address {
     if ($^O eq 'MSWin32') {
         Win32::GetProcAddress($_[0], $_[1]);
+    }
+    elsif($_[0] eq '-') {
+        DynaLoader::dl_find_symbol_anywhere($_[1]);
     }
     else {
         DynaLoader::dl_find_symbol($_[0], $_[1]);
@@ -61,8 +65,8 @@ else {
 	  $libc = load("cygwin1.dll");
 	  $libm = $libc;
 	}
-	elsif ($^O eq "freebsd") {
-	  $libc = load("libc.so.7");
+	else {
+	  $libc = '-';
 	}
     }
     if (!$libc) {
