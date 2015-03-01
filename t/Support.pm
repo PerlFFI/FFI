@@ -1,3 +1,8 @@
+package main;
+
+use strict;
+use warnings;
+
 if ($^O eq 'MSWin32') {
     require Win32;
 }
@@ -55,6 +60,9 @@ else {
         elsif ($^O eq "cygwin") {
 	  $libc = load("cygwin1.dll");
 	  $libm = $libc;
+	}
+	elsif ($^O eq "freebsd") {
+	  $libc = load("libc.so.7");
 	}
     }
     if (!$libc) {
