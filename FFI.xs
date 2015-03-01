@@ -160,7 +160,7 @@ static void validate_signature (char *sig)
 
     i = strspn(sig+2, "cCsSiIlLfdp");
     if (i != len-2)
-        croak("Invalid argument type (arg %d): '%c' (should be one of \"cCsSiIlLfdp\")",
+        croak("Invalid argument type (arg %lu): '%c' (should be one of \"cCsSiIlLfdp\")",
               i+1, sig[i+2]);
 }
 
