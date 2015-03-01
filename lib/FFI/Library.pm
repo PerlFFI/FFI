@@ -5,7 +5,7 @@ use Carp;
 use vars qw($VERSION);
 use FFI;
 
-$VERSION = '1.04';
+$VERSION = '1.05';
 
 if ($^O eq 'MSWin32') {
     require Win32;

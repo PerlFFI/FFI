@@ -1,5 +1,8 @@
 Revision history for Perl extension FFI.
 
+1.05  Sun Mar 1, 2015
+  - Fix for 64 bit platforms
+
 1.04  2008-09-06
   [Maintenance release]
   - Avoid CPAN testers emails when libffi is not installed.
