@@ -17,16 +17,19 @@ check_lib_or_exit(
 );
 
 WriteMakefile(
-  'NAME'             => 'FFI',
-  'AUTHOR'           => [ 'Graham Ollis <plicease@cpan.org>', 'Paul Moore <gustav@morpheus.demon.co.uk>' ],
-  'VERSION_FROM'     => 'lib/FFI.pm',
-  'ABSTRACT_FROM'    => 'lib/FFI.pm',
-  'LICENSE'          => 'gpl_2',
-  'DEFINE'           => ($^O eq "MSWin32" ? '-DWIN32' : ''),
-  'MIN_PERL_VERSION' => '5.008001',
-  'LIBS'             => ['-lavcall -lcallback'],
-  'PREREQ_PM'        => { 'Devel::CheckLib' => 0 },
-  'clean'            => {
+  'NAME'               => 'FFI',
+  'AUTHOR'             => [ 'Graham Ollis <plicease@cpan.org>', 'Paul Moore <gustav@morpheus.demon.co.uk>' ],
+  'VERSION_FROM'       => 'lib/FFI.pm',
+  'ABSTRACT_FROM'      => 'lib/FFI.pm',
+  'LICENSE'            => 'gpl_2',
+  'DEFINE'             => ($^O eq "MSWin32" ? '-DWIN32' : ''),
+  'MIN_PERL_VERSION'   => '5.008001',
+  'LIBS'               => ['-lavcall -lcallback'],
+  'CONFIGURE_REQUIRES' => {
+    'Devel::CheckLib'     => 0,
+    'ExtUtils::MakeMaker' => '6.52',
+  },
+  'clean'              => {
     'FILES' => "$probe.* vc*.pdb FFI.obj FFI.o FFI_def.old FFI-*",
   },
   'META_MERGE'       => {
