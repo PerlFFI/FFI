@@ -22,6 +22,3 @@ and various other places.  Several platforms have their own distributions.
 
 See the pod documentation for details of usage.
 
-Note that the test suite needs some work, to standardise it. Also, there are a
-number of Win32-specific tests which should be extracted into a separate
-file...
