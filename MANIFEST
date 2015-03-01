@@ -1,8 +1,8 @@
-COPYING
 Changes
-lib/FFI.pm
+COPYING
 FFI.xs
 INSTALL
+lib/FFI.pm
 lib/FFI/Library.pm
 Makefile.PL
 MANIFEST

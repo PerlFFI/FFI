@@ -1,5 +1,6 @@
 Revision history for Perl extension FFI.
 
+1.06  Sun Mar 1, 2015
   - Fixes for FreeBSD
   - Fixes for cygwin
   - Use Devel::CheckLib for more reliable probe of libffcall

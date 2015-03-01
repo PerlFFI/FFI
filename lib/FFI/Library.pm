@@ -5,7 +5,7 @@ use warnings;
 use Carp qw( croak );
 use FFI;
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
 
 if ($^O eq 'MSWin32') {
     require Win32;
