@@ -16,7 +16,7 @@ __END__
 
 =head1 NAME
 
-FFI - Perl Foreign Function Interface
+FFI - Perl Foreign Function Interface based on GNU ffcall
 
 =head1 SYNOPSIS
 
@@ -136,7 +136,7 @@ Possibly, improve support for passing pointers to "native" types.
 
 =back
 
-=head1 LICENSE
+=head1 CAVEATS
 
 Substantial portions of the code for this module (the underlying FFI code) are
 licensed under the GNU General Public License. Under the terms of that
@@ -147,12 +147,29 @@ My personal preference would be to distribute this module under the same terms
 as Perl. However, I understand that this is not possible, given the licensing
 of the FFI code.
 
-=head1 STATUS
+=head1 SUPPORT
 
-This is a maintenance release. We will be releasing an updated but
-incompatible 2.00 version shortly.
+Please open any support tickets with this project's GitHub repository here:
 
-Subversion repository: L<http://svn.openfoundry.org/perlffi/trunk/>
+L<https://github.com/plicease/FFI/issues>
+
+=head1 SEE ALSO
+
+=over 4
+
+=item L<FFI::CheckLib>
+
+Portable functions for finding libraries.
+
+=item L<FFI::Platypus>
+
+FFI interface based on libffi, which has a less restrictive license.
+
+=item L<FFI::Raw>
+
+Another FFI interface based on libffi.
+
+=back
 
 =head1 AUTHOR
 
@@ -163,13 +180,15 @@ Mitchell Charity C<< <mcharity@vendian.org> >> and
 Reini Urban C<< <RURBAN@cpan.org> >> contributed fixes.
 
 Anatoly Vorobey C<< <avorobey@pobox.com> >> and Gaal Yahas C<<
-<gaal@forum2.org> >> are the current maintainers.
+<gaal@forum2.org> >> are former maintainers.
 
-=head1 SEE ALSO
+Graham Ollis C<< <plicease@cpan.org >> is the current maintainer
 
-L<http://directory.fsf.org/ffcall.html>
-
-Bruno Haible's CLisp Common Lisp implementation, from which the underlying
-foreign function interface code was taken.
+=head1 COPYRIGHT AND LICENSE
+ 
+This software is copyright (c) 1999 by Paul Moore.
+  
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

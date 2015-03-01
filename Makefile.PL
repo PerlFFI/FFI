@@ -7,26 +7,31 @@ my $probe = "ffcall-probe";
 my @ffcall_opts = find_ffcall();
 
 WriteMakefile(
-    'NAME'      => 'FFI',
-    'AUTHOR'    => 'Paul Moore <gustav@morpheus.demon.co.uk>',
-    'ABSTRACT'  => 'Foreign Function Interface for Perl',
-    'VERSION_FROM' => 'FFI.pm',
-    'PM'        => { 'FFI.pm' => '$(INST_LIBDIR)/FFI.pm',
-                     'Library.pm' => '$(INST_LIBDIR)/FFI/Library.pm',
-		   },
-    'DEFINE'    => ($^O eq "MSWin32" ? '-DWIN32' : ''),
-    'clean'     => { FILES => "$probe.* vc*.pdb FFI.obj FFI.o FFI_def.old" },
-    'META_MERGE' => {
-        'meta-spec' => { version => 2 },
-        'resources' => {
-            'repository' => {
-                'type' => 'git',
-                'url'  => 'https://github.com/plicease/FFI.git',
-                'web'  => 'https://github.com/plicease/FFI',
-            },
-        },
-    },
-    @ffcall_opts,
+  'NAME'           => 'FFI',
+  'AUTHOR'         => [ 'Graham Ollis <plicease@cpan.org>', 'Paul Moore <gustav@morpheus.demon.co.uk>' ],
+  'VERSION_FROM'   => 'lib/FFI.pm',
+  'ABSTRACT_FROM'  => 'lib/FFI.pm',
+  'LICENSE'        => 'gpl_2',
+  'DEFINE'         => ($^O eq "MSWin32" ? '-DWIN32' : ''),
+  MIN_PERL_VERSION => '5.006000',
+  'clean'         => {
+    'FILES' => "$probe.* vc*.pdb FFI.obj FFI.o FFI_def.old FFI-*",
+  },
+  'META_MERGE' => {
+    'meta-spec' => { version => 2 },
+    'resources' => {
+      'bugtracker' => {
+        'web'  => 'https://github.com/plicease/FFI/issues',
+      },
+      'homepage' => 'https://github.com/plicease/FFI',
+      'repository' => {
+        'type' => 'git',
+        'url'  => 'https://github.com/plicease/FFI.git',
+        'web'  => 'https://github.com/plicease/FFI',
+      },
+     },
+  },
+  @ffcall_opts,
 );
 
 exit 0;
