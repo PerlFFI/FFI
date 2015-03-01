@@ -184,6 +184,10 @@ extensive feature set, and libffi has a less restrictive license.
 
 Another FFI interface based on libffi.
 
+=item L<Win32::API>
+
+An FFI interface for Perl on Microsoft Windows.
+
 =back
 
 =head1 AUTHOR
