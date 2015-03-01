@@ -9,9 +9,12 @@ use 5.008001;
 use Config;
 use ExtUtils::MakeMaker;
 use Cwd;
+use Devel::CheckLib;
 
-my $probe = "ffcall-probe";
-my @ffcall_opts = find_ffcall();
+check_lib_or_exit(
+  lib    => [qw( avcall callback )],
+  header => [qw( avcall.h callback.h )],
+);
 
 WriteMakefile(
   'NAME'             => 'FFI',
@@ -21,6 +24,8 @@ WriteMakefile(
   'LICENSE'          => 'gpl_2',
   'DEFINE'           => ($^O eq "MSWin32" ? '-DWIN32' : ''),
   'MIN_PERL_VERSION' => '5.008001',
+  'LIBS'             => ['-lavcall -lcallback'],
+  'PREREQ_PM'        => { 'Devel::CheckLib' => 0 },
   'clean'            => {
     'FILES' => "$probe.* vc*.pdb FFI.obj FFI.o FFI_def.old FFI-*",
   },
@@ -38,55 +43,4 @@ WriteMakefile(
       },
      },
   },
-  @ffcall_opts,
 );
-
-exit 0;
-
-########################################################################
-
-sub find_ffcall {
-    my $libs = '-lavcall -lcallback';
-
-    open my $fh, ">", "$probe.c" or die "open: $!";
-    print $fh <<'.';
-#include <callback.h>
-
-int
-main(int argv, char ** argc) {
-    /* this isn't really intended to be run */
-    __TR_function cb = alloc_callback(&main, 0);
-    free_callback(cb);
-}
-.
-    close $fh or die "close: $!";
-
-    # this is probably not the cleanest way to get the CC. But I want to
-    # use EU::MM in the 1.0x line of this module.
-    require ExtUtils::MM;
-    my $mm = MM->new({NAME => 'FFI'});
-
-    print "$mm->{CC} $libs $probe.c 2> $probe.err\n";
-    if (system "$mm->{CC} $probe.c $libs -o $probe.exe 2> $probe.err") {
-        print << ".";
-*** ffcall probe compilation failed. Do you have the ffcall library (and
-    its development files) installed? If not, you can fetch it at:
-
-        http://directory.fsf.org/wiki/Libffcall
-
-    Alternatively, your OS vendor may have made packages available for you.
-    See INSTALL for suggested package names.
-
-    The compilation error messages are available at $probe.err .
-
-.
-        # According to http://cpantest.grango.org/wiki/CPANAuthorNotes, this
-        # is the preferred method of failing when library dependencies are
-        # not met, so that CPAN testers do not send spurious error reports.
-        exit 0;
-    }
-
-    unlink "$probe.$_" for qw(c o exe err);
-
-    return (LIBS => [$libs]);
-}
