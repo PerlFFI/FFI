@@ -1,6 +1,12 @@
-use ExtUtils::MakeMaker;
+BEGIN {
+  unless(eval q{ use 5.008001; 1}) {
+    print "Perl 5.008001 or better required\n";
+    exit;
+  }
+}
 
-use 5.006;
+use 5.008001;
+use ExtUtils::MakeMaker;
 use Cwd;
 
 my $probe = "ffcall-probe";
@@ -13,7 +19,7 @@ WriteMakefile(
   'ABSTRACT_FROM'  => 'lib/FFI.pm',
   'LICENSE'        => 'gpl_2',
   'DEFINE'         => ($^O eq "MSWin32" ? '-DWIN32' : ''),
-  MIN_PERL_VERSION => '5.006000',
+  MIN_PERL_VERSION => '5.008001',
   'clean'         => {
     'FILES' => "$probe.* vc*.pdb FFI.obj FFI.o FFI_def.old FFI-*",
   },

@@ -1,13 +1,12 @@
 package FFI;
 
 use strict;
-use Carp;
-use vars qw($VERSION @ISA);
+use warnings;
 
 require DynaLoader;
 
-@ISA = qw(DynaLoader);
-$VERSION = '1.05';
+our @ISA = qw(DynaLoader);
+our $VERSION = '1.05';
 
 bootstrap FFI $VERSION;
 

@@ -1,11 +1,11 @@
 package FFI::Library;
 
 use strict;
-use Carp;
-use vars qw($VERSION);
+use warnings;
+use Carp qw( croak );
 use FFI;
 
-$VERSION = '1.05';
+our $VERSION = '1.05';
 
 if ($^O eq 'MSWin32') {
     require Win32;
