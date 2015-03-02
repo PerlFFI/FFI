@@ -1,5 +1,6 @@
 Revision history for Perl extension FFI.
 
+1.07  Mon Mar 2, 2015
   - use DynaLoader::dl_find_symbol_anywhere if libc cannot
     easily be guessed
 
