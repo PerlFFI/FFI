@@ -1,5 +1,8 @@
 If you are interested in FFI and Perl you should probably consider newer 
-projects, such as FFI::Platypus or FFI::Raw instead.
+projects, such as FFI::Platypus or FFI::Raw instead.  They have more 
+features, are usually faster and are actively maintained.
+
+The original README follows.
 
 The FFI and FFI::Library modules implement a foreign function interface 
 for Perl.  The foreign function interface allows Perl code to directly 

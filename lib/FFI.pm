@@ -29,14 +29,16 @@ FFI - Perl Foreign Function Interface based on GNU ffcall
 
 =head1 DESCRIPTION
 
+B<NOTE>: Newer FFI modules such as L<FFI::Platypus> and L<FFI::Raw>
+provide more functionality and so it is strongly recommend that you use
+one of them for new projects and even consider migrating to one of
+them for existing projects.
+
 This module provides a low-level foreign function interface to Perl. It 
 allows the calling of any function for which the user can supply an 
 address and calling signature. Furthermore, it provides a method of 
 encapsulating Perl subroutines as callback functions whose addresses can 
 be passed to C code.
-
-Newer FFI modules such as L<FFI::Platypus> and L<FFI::Raw> provide more 
-functionality and should probably be considered for new projects.
 
 =head1 FUNCTION SIGNATURES
 
