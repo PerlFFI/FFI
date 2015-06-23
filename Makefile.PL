@@ -44,6 +44,7 @@ WriteMakefile(
         'url'  => 'https://github.com/plicease/FFI.git',
         'web'  => 'https://github.com/plicease/FFI',
       },
+      x_IRC => "irc://irc.perl.org/#native",
      },
   },
 );
