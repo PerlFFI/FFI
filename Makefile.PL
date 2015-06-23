@@ -30,7 +30,7 @@ WriteMakefile(
     'ExtUtils::MakeMaker' => '6.52',
   },
   'clean'              => {
-    'FILES' => "$probe.* vc*.pdb FFI.obj FFI.o FFI_def.old FFI-*",
+    'FILES' => "vc*.pdb FFI.obj FFI.o FFI_def.old FFI-*",
   },
   'META_MERGE'       => {
     'meta-spec' => { version => 2 },
