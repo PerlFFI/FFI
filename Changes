@@ -1,5 +1,7 @@
 Revision history for Perl extension FFI.
 
+  - Use Alien::FFCall
+
 1.08  Tue Jun 23, 2015
   - Add irc.perl.org #irc
 

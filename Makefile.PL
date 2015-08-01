@@ -6,15 +6,8 @@ BEGIN {
 }
 
 use 5.008001;
-use Config;
 use ExtUtils::MakeMaker;
-use Cwd;
-use Devel::CheckLib;
-
-check_lib_or_exit(
-  lib    => [qw( avcall callback )],
-  header => [qw( avcall.h callback.h )],
-);
+use Alien::FFCall;
 
 WriteMakefile(
   'NAME'               => 'FFI',
@@ -24,9 +17,10 @@ WriteMakefile(
   'LICENSE'            => 'gpl_2',
   'DEFINE'             => ($^O eq "MSWin32" ? '-DWIN32' : ''),
   'MIN_PERL_VERSION'   => '5.008001',
-  'LIBS'               => ['-lavcall -lcallback'],
+  'CCFLAGS'            => Alien::FFCall->cflags,
+  'LIBS'               => Alien::FFCall->libs,
   'CONFIGURE_REQUIRES' => {
-    'Devel::CheckLib'     => 0,
+    'Alien::FFCall'       => 0.02,
     'ExtUtils::MakeMaker' => '6.52',
   },
   'clean'              => {
