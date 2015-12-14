@@ -3,7 +3,7 @@ sudo: false
 
 install:
   - perlbrew list
-  - cpanm --installdeps -n .
+  - cpanm --installdeps -n -v .
 
 perl:
   - "5.8"
