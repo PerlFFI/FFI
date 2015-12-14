@@ -4,7 +4,7 @@ sudo: false
 install:
   - perlbrew list
   - cpanm -n Alien::FFCall ExtUtils::MakeMaker
-  - cpanm --installdeps -n -v .
+  - cpanm --installdeps -n .
 
 perl:
   - "5.8"
