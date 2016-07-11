@@ -4,13 +4,17 @@ use strict;
 use warnings;
 use Carp ();
 use FFI::Platypus;
-use constant _is_win32 => $^O =~ /^(MSWi32|cygwin|msys2?)$/;
+use constant _is_win32 => $^O =~ /^(MSWi32|cygwin|msys2?)$/ && do { require Config; $Config::Config{longsize} == 4 };
 
 # ABSTRACT: Perl Foreign Function Interface based on libffi
 # VERSION
 
 our $ffi = FFI::Platypus->new;
 $ffi->lib(undef);
+
+my $stdcall_ffi = _is_win32
+  ? do { my $ffi = FFI::Platypus->new; $ffi->lib(undef); $ffi->abi('stdcall'); }
+  : $ffi;
 
 our %typemap = qw(
   c   char
@@ -30,17 +34,16 @@ our %typemap = qw(
 sub call
 {
   my($addr, $signature, @args) = @_;
-  my $convention;
+  my $ffi = $FFI::ffi;
   if($signature =~ s/^[sc]//)
   {
-    $convention = 'stdcall' if _is_win32;
+    $ffi = $stdcall_ffi if _is_win32;
   }
   else
   {
     Carp::croak("first character of signature must be s or c");
   }
   my($ret_type, @args_types) = map { $typemap{$_} } split //, $signature;
-  $DB::single = 1;
   $ffi->function($addr => \@args_types => $ret_type)->call(@args);
 }
 
