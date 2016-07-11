@@ -47,7 +47,8 @@ sub address {
 
 # Get the libc and libm libraries
 
-use vars qw($libc $libm);
+our $libc;
+our $libm;
 if ($^O eq 'MSWin32') {
     $libc = load("MSVCRT80") || load("MSVCRT71") || load("MSVCRT70") ||
             load("MSVCRT60") || load("MSVCRT40") || load("MSVCRT20");

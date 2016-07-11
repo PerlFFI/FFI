@@ -13,10 +13,6 @@ $modules{$_} = $_ for qw(
   ExtUtils::MakeMaker
   FFI::Platypus
   Test::More
-  YAML
-  constant
-  lib
-  vars
 );
 
 
