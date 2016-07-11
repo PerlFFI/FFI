@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Carp ();
 use FFI::Platypus;
-use constant _is_win32 => $^O =~ /^(MSWi32|cygwin|msys2?)$/ && do { require Config; $Config::Config{longsize} == 4 };
+use constant _is_win32 => $^O =~ /^(MSWin32|cygwin|msys2?)$/ && do { require Config; $Config::Config{longsize} == 4 };
 
 # ABSTRACT: Perl Foreign Function Interface based on libffi
 # VERSION

@@ -4,18 +4,10 @@ use strict;
 use warnings;
 use Carp ();
 use FFI;
+use constant _is_win => $^O =~ /^(MSWin32|cygwin|msys2?)$/;
 
 # ABSTRACT: Perl Access to Dynamically Loaded Libraries
 # VERSION
-
-if(FFI::_is_win32)
-{
-  require Win32;
-}
-else
-{
-  require DynaLoader;
-}
 
 sub new
 {
@@ -24,12 +16,14 @@ sub new
   scalar(@_) <= 1
     or Carp::croak('Usage: $lib = FFI::Library->new($filename, [, $flags ])');
   my $lib;
-  if ($^O eq 'MSWin32')
+  if (_is_win)
   {
+    require Win32;
     $lib = Win32::LoadLibrary($libname) or return undef;
   }
   else
   {
+    require DynaLoader;
     my $so = $libname;
     -e $so or $so = DynaLoader::dl_findfile($libname) || $libname;
     $lib = DynaLoader::dl_load_file($so, @_)
@@ -42,7 +36,7 @@ sub function
 {
   my($self, $name, $sig) = @_;
   my $addr = shift;
-  if(FFI::_is_win32)
+  if(_is_win)
   {
     $addr = Win32::GetProcAddress($$self, $name);
   }
