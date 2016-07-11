@@ -8,6 +8,9 @@ use FFI::Library;
 use lib "./t";
 use Support;
 
+our $libc;
+our $libm;
+
 # Function addresses
 my $atoi = address($libc, "atoi");
 my $strlen = address($libc, "strlen");
