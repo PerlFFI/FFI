@@ -35,9 +35,9 @@ sub call
 {
   my($addr, $signature, @args) = @_;
   my $ffi = $FFI::ffi;
-  if($signature =~ s/^[sc]//)
+  if($signature =~ s/^([sc])//)
   {
-    $ffi = $stdcall_ffi if _is_win32;
+    $ffi = $stdcall_ffi if $1 eq 's';
   }
   else
   {
@@ -46,6 +46,13 @@ sub call
   my($ret_type, @args_types) = map { $typemap{$_} } split //, $signature;
   $ffi->function($addr => \@args_types => $ret_type)->call(@args);
 }
+
+sub callback
+{
+  Carp::croak("not supported yet");
+}
+
+package FFI::Callback;
 
 1;
 
