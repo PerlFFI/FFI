@@ -169,6 +169,16 @@ L<https://github.com/plicease/FFI/issues>
 
 =over 4
 
+=item L<FFI::Platypus>
+
+Platypus is another FFI interface based on libffi.  It has a more 
+extensive feature set, and libffi has a less restrictive license.
+
+=item L<Alt::FFI::libffi>
+
+An alternate implmentation of this module that uses L<FFI::Platypus>
+under the covers.
+
 =item L<FFI::Library>
 
 Higher level interface to libraries using this module.
@@ -176,11 +186,6 @@ Higher level interface to libraries using this module.
 =item L<FFI::CheckLib>
 
 Portable functions for finding libraries.
-
-=item L<FFI::Platypus>
-
-Platypus is another FFI interface based on libffi.  It has a more 
-extensive feature set, and libffi has a less restrictive license.
 
 =item L<FFI::Raw>
 
