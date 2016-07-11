@@ -10,13 +10,9 @@ my %modules;
 my $post_diag;
 
 $modules{$_} = $_ for qw(
-  Carp
-  Cwd
-  DynaLoader
   ExtUtils::MakeMaker
   FFI::Platypus
   Test::More
-  Win32
   YAML
   constant
   lib

@@ -10,6 +10,7 @@ pod_spelling_system:
     - Vorobey
     - Yahas
     - libffi
+    - ffcall
 
 pod_coverage:
   skip: 0
