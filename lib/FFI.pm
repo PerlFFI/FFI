@@ -83,10 +83,16 @@ be passed to C code.
 
 =head2 call
 
- FFI::call($address, $signature, @arguments);
+ my $ret = FFI::call($address, $signature, @arguments);
 
 Call the function at the given C<$address> with the given C<$signature>>
 (see below) and the given C<@arguments>.
+
+=head2 callback
+
+ my $address = FFI::callback($signature, \&subref);
+
+Creates a c callback that will call a Perl subref.
 
 =head1 FUNCTION SIGNATURES
 
