@@ -1,5 +1,9 @@
 use strict;
 use warnings;
-use Test::More tests => 1;
+use Test::More;
 
-use_ok 'Alt::FFI';
+require_ok 'Alt::FFI::libffi';
+require_ok 'FFI';
+require_ok 'FFI::Library';
+
+done_testing;

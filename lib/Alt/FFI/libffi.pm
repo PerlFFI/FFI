@@ -1,4 +1,4 @@
-package Alt::FFI;
+package Alt::FFI::libffi;
 
 use strict;
 use warnings;
