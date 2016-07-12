@@ -31,28 +31,45 @@ our %typemap = qw(
   v   void
 );
 
-sub call
+sub _ffi
 {
-  my($addr, $signature, @args) = @_;
-  my $ffi = $FFI::ffi;
-  if($signature =~ s/^([sc])//)
+  if($_[0] =~ s/^([sc])//)
   {
-    $ffi = $stdcall_ffi if $1 eq 's';
+    return $stdcall_ffi if $1 eq 's';
   }
   else
   {
     Carp::croak("first character of signature must be s or c");
   }
+  
+  $ffi;
+}
+
+sub call
+{
+  my($addr, $signature, @args) = @_;
+  my $ffi = _ffi($signature);
   my($ret_type, @args_types) = map { $typemap{$_} } split //, $signature;
   $ffi->function($addr => \@args_types => $ret_type)->call(@args);
 }
 
 sub callback
 {
-  Carp::croak("not supported yet");
+  my($signature, $sub) = @_;
+  my $ffi = _ffi($signature);
+  my($ret_type, @args_types) = map { $typemap{$_} } split //, $signature;
+  my $type = '(' . join(',', @args_types) . ')->' . $ret_type;
+  my $closure = $ffi->closure($sub);
+  bless {
+    addr    => $ffi->cast($type => 'opaque', $closure),
+    sub     => $sub,
+    closure => $closure,
+  }, 'FFI::Callback';
 }
 
 package FFI::Callback;
+
+sub addr { shift->{addr} }
 
 1;
 
