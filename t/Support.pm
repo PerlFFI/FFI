@@ -81,6 +81,23 @@ else {
     } elsif ($libm_arg !~ /libm\.a$/) {
         $libm = load("-lm");
     }
+        
+    if (!$libm) {
+
+        if($^O =~ /^(gnukfreebsd|linux)$/ && -r "/etc/debian_version")
+        {
+          if(-x "/usr/bin/dpkg-architecture")
+          {
+            my($arch) = map { chomp; (split /=/)[1] }
+                       grep /^DEB_HOST_MULTIARCH=/,
+                       `/usr/bin/dpkg-architecture`;
+            require File::Glob;
+            my ($so) = File::Glob::bsd_glob("/lib/$arch/libm.so*");
+            $libm = DynaLoader::dl_load_file($so) if $so;
+          }
+        }
+    }
+        
     if (!$libm) {
         die "Can't load -lm: ", DynaLoader::dl_error(), "\nGiving up.\n";
     }

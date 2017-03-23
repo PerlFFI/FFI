@@ -1,5 +1,7 @@
 Revision history for Perl extension FFI.
 
+  - More aggressive libm discovery for tests on Debian
+
 1.09  Sun Aug 2, 2015
   - Use Alien::FFCall
 
