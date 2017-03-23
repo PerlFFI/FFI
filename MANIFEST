@@ -1,3 +1,5 @@
+.gitattributes
+.travis.yml
 Changes
 COPYING
 FFI.xs
@@ -6,8 +8,9 @@ lib/FFI.pm
 lib/FFI/Library.pm
 Makefile.PL
 MANIFEST
-README
+README.md
 t/basic.t
+t/callback.t
 t/Support.pm
 t/win32.t
 TODO

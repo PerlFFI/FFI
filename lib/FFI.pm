@@ -6,7 +6,7 @@ use warnings;
 require DynaLoader;
 
 our @ISA = qw(DynaLoader);
-our $VERSION = '1.09';
+our $VERSION = '1.10';
 
 bootstrap FFI $VERSION;
 
