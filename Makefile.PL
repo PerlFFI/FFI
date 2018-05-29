@@ -19,7 +19,7 @@ WriteMakefile(
   'MIN_PERL_VERSION'   => '5.008001',
   'CONFIGURE_REQUIRES' => {
     'Alien::FFCall'         => 0.02,
-    'Alien::Build::Wrapper' => '0',
+    'Alien::Base::Wrapper' => '0',
     'ExtUtils::MakeMaker'   => '6.52',
   },
   'clean'              => {
