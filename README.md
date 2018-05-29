@@ -1,4 +1,4 @@
-# FFI [![Build Status](https://secure.travis-ci.org/plicease/FFI.png)](http://travis-ci.org/plicease/FFI)
+# FFI [![Build Status](https://secure.travis-ci.org/Perl5-FFI/FFI.png)](http://travis-ci.org/Perl5-FFI/FFI)
 
 Perl Foreign Function Interface based on GNU ffcall
 

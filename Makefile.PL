@@ -29,13 +29,13 @@ WriteMakefile(
     'meta-spec' => { version => 2 },
     'resources' => {
       'bugtracker' => {
-        'web'  => 'https://github.com/plicease/FFI/issues',
+        'web'  => 'https://github.com/Perl5-FFI/FFI/issues',
       },
-      'homepage' => 'https://github.com/plicease/FFI',
+      'homepage' => 'https://github.com/Perl5-FFI/FFI',
       'repository' => {
         'type' => 'git',
-        'url'  => 'https://github.com/plicease/FFI.git',
-        'web'  => 'https://github.com/plicease/FFI',
+        'url'  => 'https://github.com/Perl5-FFI/FFI.git',
+        'web'  => 'https://github.com/Perl5-FFI/FFI',
       },
       x_IRC => "irc://irc.perl.org/#native",
      },

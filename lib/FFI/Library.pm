@@ -93,7 +93,7 @@ functionality and should probably be considered for new projects.
 Please open any support tickets with this project's GitHub repository 
 here:
 
-L<https://github.com/plicease/FFI/issues>
+L<https://github.com/Perl5-FFI/FFI/issues>
 
 =head1 SEE ALSO
 
