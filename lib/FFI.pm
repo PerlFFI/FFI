@@ -85,7 +85,7 @@ sub addr { shift->{addr} }
 
 =head1 DESCRIPTION
 
-B<NOTE>: Newer FFI modules such as L<FFI::Platypus> and L<FFI::Raw>
+B<NOTE>: Newer and better maintained FFI modules such as L<FFI::Platypus>
 provide more functionality and so it is strongly recommend that you use
 one of them for new projects and even consider migrating to one of
 them for existing projects.
@@ -252,10 +252,6 @@ Portable functions for finding libraries.
 
 Platypus is another FFI interface based on libffi.  It has a more 
 extensive feature set, and libffi has a less restrictive license.
-
-=item L<FFI::Raw>
-
-Another FFI interface based on libffi.
 
 =item L<Win32::API>
 
