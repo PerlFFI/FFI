@@ -29,10 +29,10 @@ FFI - Perl Foreign Function Interface based on GNU ffcall
 
 =head1 DESCRIPTION
 
-B<NOTE>: Newer FFI modules such as L<FFI::Platypus> and L<FFI::Raw>
-provide more functionality and so it is strongly recommend that you use
-one of them for new projects and even consider migrating to one of
-them for existing projects.
+B<NOTE>: Newer and better maintained FFI modules such as 
+L<FFI::Platypus> provide more functionality and so it is strongly 
+recommend that you use one of them for new projects and even consider 
+migrating to one of them for existing projects.
 
 This module provides a low-level foreign function interface to Perl. It 
 allows the calling of any function for which the user can supply an 
@@ -186,10 +186,6 @@ Higher level interface to libraries using this module.
 =item L<FFI::CheckLib>
 
 Portable functions for finding libraries.
-
-=item L<FFI::Raw>
-
-Another FFI interface based on libffi.
 
 =item L<Win32::API>
 

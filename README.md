@@ -17,7 +17,7 @@ $ret = FFI::call($addr, $signature, $cb->addr, ...);
 # DESCRIPTION
 
 If you are interested in FFI and Perl you should probably consider newer 
-projects, such as FFI::Platypus or FFI::Raw instead.  They have more 
+projects, such as FFI::Platypus instead.  They have more 
 features, are usually faster and are actively maintained.
 
 The original README follows.
