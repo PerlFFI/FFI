@@ -2,6 +2,7 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
   - Windows fixes
+  - Floating point fixes to test
 
 0.03      2018-06-06 07:39:07 -0400
   - Documentation update
