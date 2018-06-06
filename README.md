@@ -1,4 +1,4 @@
-# Alt::FFI::libffi [![Build Status](https://secure.travis-ci.org/plicease/Alt-FFI-libffi.png)](http://travis-ci.org/plicease/Alt-FFI-libffi)
+# Alt::FFI::libffi [![Build Status](https://secure.travis-ci.org/Perl5-FFI/Alt-FFI-libffi.png)](http://travis-ci.org/Perl5-FFI/Alt-FFI-libffi)
 
 Perl Foreign Function interface based on libffi
 
