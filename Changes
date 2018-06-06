@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Documentation update
 
 0.02      2018-06-01 08:46:02 -0400
   - Update test suite to match FFI 1.12

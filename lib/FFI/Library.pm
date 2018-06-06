@@ -114,10 +114,6 @@ Portable functions for finding libraries.
 Platypus is another FFI interface based on libffi.  It has a more
 extensive feature set, and libffi has a less restrictive license.
 
-=item L<FFI::Raw>
-
-Another FFI interface based on libffi.
-
 =item L<Win32::API>
 
 An FFI interface for Perl on Microsoft Windows.
