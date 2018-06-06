@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Windows fixes
 
 0.03      2018-06-06 07:39:07 -0400
   - Documentation update

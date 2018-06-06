@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Carp ();
 use FFI::Platypus;
-use constant _is_win32 => $^O =~ /^(MSWin32|cygwin|msys2?)$/ && do { require Config; $Config::Config{longsize} == 4 };
+use constant _is_win32 => $^O =~ /^(MSWin32|cygwin|msys2?)$/ && FFI::Platypus->abis->{stdcall};
 
 # ABSTRACT: Perl Foreign Function Interface based on libffi
 # VERSION
@@ -13,7 +13,11 @@ our $ffi = FFI::Platypus->new;
 $ffi->lib(undef);
 
 my $stdcall_ffi = _is_win32
-  ? do { my $ffi = FFI::Platypus->new; $ffi->lib(undef); $ffi->abi('stdcall'); }
+  ? do {
+    my $ffi = FFI::Platypus->new;
+    $ffi->lib(undef);
+    $ffi->abi('stdcall');
+  }
   : $ffi;
 
 our %typemap = qw(
