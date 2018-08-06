@@ -5,8 +5,8 @@ use FFI;
 use FFI::Library;
 
 # Load the C and Math libraries
-use lib "./t";
-use Support;
+use lib "./t/lib";
+use Test::FFI::Legacy;
 
 our $libc;
 our $libm;
