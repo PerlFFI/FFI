@@ -7,10 +7,10 @@ INSTALL
 lib/FFI.pm
 lib/FFI/Library.pm
 Makefile.PL
-MANIFEST
+MANIFEST			This list of files
 README.md
-t/basic.t
-t/callback.t
-t/Support.pm
-t/win32.t
+t/ffi.t
+t/ffi__callback.t
+t/ffi__win32.t
+t/lib/Test/FFI/Legacy.pm
 TODO
