@@ -2,6 +2,7 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
   - Added test for FFI::Library
+  - Added address method on FFI::Library
 
 0.04      2018-06-06 08:33:26 -0400
   - Windows fixes
