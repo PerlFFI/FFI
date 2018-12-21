@@ -14,26 +14,33 @@ sub new
   Carp::croak('Usage: $lib = FFI::Library->new($filename [, $flags ])')
     unless @_ <= 3;
 
+  $flags ||= 0;
+
   if(! defined $libname)
   {
     return bless {
       impl => 'null',
     }, $class;
   }
+  elsif(ref $libname and int($libname) == int(\$0))
+  {
+    return $class->_dl_impl(undef, 0);
+  }
   elsif(_is_win)
   {
-    require Win32;
-    my $handle = Win32::LoadLibrary($libname);
-    return unless $handle;
-    return bless {
-      impl => 'win32',
-      handle => $handle,
-    }, $class;
+    return $class->_dl_impl($libname, 0);
+  }
+  elsif(-e $libname)
+  {
+    return $class->_dl_impl(
+      $libname,
+      $flags == 0x01 ? FFI::Platypus::Lang::DL::RTLD_GLOBAL() : 0,
+    );
   }
   else
   {
     require DynaLoader;
-    my $so = -e $libname ? $libname : DynaLoader::dl_findfile($libname) || $libname;
+    my $so = DynaLoader::dl_findfile($libname) || $libname;
     my $handle = DynaLoader::dl_load_file($so, $flags || 0);
     return unless $handle;
     return bless {
@@ -43,15 +50,24 @@ sub new
   }
 }
 
+sub _dl_impl
+{
+  my $class = shift;
+  require FFI::Platypus::DL;
+  my $handle = FFI::Platypus::DL::dlopen(@_);
+  return unless defined $handle;
+  bless { impl => 'dl', handle => $handle }, $class;
+}
+
 sub function
 {
   my($self, $name, $sig) = @_;
 
   my $addr;
 
-  if($self->{impl} eq 'win32')
+  if($self->{impl} eq 'dl')
   {
-    $addr = Win32::GetProcAddress($self->{handle}, $name);    
+    $addr = FFI::Platypus::DL::dlsym($self->{handle}, $name);
   }
   elsif($self->{impl} eq 'dynaloader')
   {
@@ -76,9 +92,10 @@ sub function
 sub DESTROY
 {
   my($self) = @_;
-  if($self->{impl} eq 'win32')
+
+  if($self->{impl} eq 'dl')
   {
-    Win32::FreeLibrary($self->{handle});
+    FFI::Platypus::DL::dlclose($self->{handle});
   }
   elsif($self->{impl} eq 'dynaloader')
   {

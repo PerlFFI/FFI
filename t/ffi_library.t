@@ -32,18 +32,17 @@ subtest 'basic' => sub {
   is($f0->(42), 42, "f0(42) = 42");
 };
 
-#subtest 'call exe functions' => sub {
-#  my $lib = FFI::Library->new(undef);
-#  isa_ok $lib, 'FFI::Library';
-#
-#  eval { $lib->function('bogus', 'cCC') };
-#  like $@, qr/Unknown function bogus/;
-#
-#
-#  my $strlen = $lib->function('strlen', 'cIp');
-#  ok($strlen, "strlen is defined");
-#
-#  is($strlen->("foo"), 3, "strlen of foo is 3");
-#};
+subtest 'call exe functions' => sub {
+  my $lib = FFI::Library->new(\$0);
+  isa_ok $lib, 'FFI::Library';
+
+  eval { $lib->function('bogus', 'cCC') };
+  like $@, qr/Unknown function bogus/;
+
+  my $strlen = $lib->function('strlen', 'cIp');
+  ok($strlen, "strlen is defined");
+
+  is($strlen->("foo"), 3, "strlen of foo is 3");
+};
 
 done_testing;
