@@ -23,8 +23,12 @@ subtest 'basic' => sub {
   my $lib = FFI::Library->new($testlibfile);
   isa_ok $lib, 'FFI::Library';
 
+  is $lib->address('f1'), undef, 'address of bad symbol is undef';
+
   eval { $lib->function('f1', 'cCC') };
   like $@, qr/Unknown function f1/, 'error for unknown function';
+
+  isnt $lib->address('f0'), undef, 'address of good symbol is not undef';
 
   my $f0 = $lib->function('f0', 'cCC');
   ok($0, "f0 is defined");

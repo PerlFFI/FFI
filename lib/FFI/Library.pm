@@ -61,29 +61,34 @@ sub _dl_impl
   bless { impl => 'dl', handle => $handle }, $class;
 }
 
-sub function
+sub address
 {
-  my($self, $name, $sig) = @_;
-
-  my $addr;
+  my($self, $name) = @_;
 
   if($self->{impl} eq 'dl')
   {
-    $addr = FFI::Platypus::DL::dlsym($self->{handle}, $name);
+    return FFI::Platypus::DL::dlsym($self->{handle}, $name);
   }
   elsif($self->{impl} eq 'dynaloader')
   {
-    $addr = DynaLoader::dl_find_symbol($self->{handle}, $name);
+    return DynaLoader::dl_find_symbol($self->{handle}, $name);
   }
   elsif($self->{impl} eq 'null')
   {
-    $addr = undef;
+    return;
   }
   else
   {
     Carp::croak("Unknown implementaton: @{[ $self->{impl} ]}");
   }
-  
+}
+
+sub function
+{
+  my($self, $name, $sig) = @_;
+
+  my $addr = $self->address($name);
+
   Carp::croak("Unknown function $name")
     unless defined $addr;
 
@@ -142,9 +147,16 @@ Creates an instance of C<FFI::Library>.
 
 =head1 FUNCTIONS
 
+=head2 address
+
+ my $address = $lib->address($function_name);
+
+Returns the symbol of the given function.  Returns C<undef> if
+the symbol is not found.
+
 =head2 function
 
- my $sub = $lib->function($function_name, $signature");
+ my $sub = $lib->function($function_name, $signature);
 
 Creates a code-reference like object which you can call.
 
