@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Test::More skip_all => 'borked';
 use FFI;
-use FFI::Library;
 
 sub callback1
 {

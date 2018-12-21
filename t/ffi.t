@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Test::More;
 use FFI;
-use FFI::Library;
 
 # Load the C and Math libraries
 use lib "./t/lib";
