@@ -11,7 +11,7 @@ subtest 'bad input' => sub {
   eval { FFI::Library->new };
   is $@, '', 'this... strangely... works.';
 
-  my $usage = 'Usage: $lib = FFI::Library->new($filename, [, $flags ])';
+  my $usage = 'Usage: $lib = FFI::Library->new($filename [, $flags ])';
   eval { FFI::Library->new(1,2,3) };
   like $@, qr/\Q$usage\E/, 'usage with no dll';
 
