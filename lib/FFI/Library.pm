@@ -24,17 +24,17 @@ sub new
   }
   elsif(ref $libname and int($libname) == int(\$0))
   {
-    return $class->_dl_impl(undef, 0);
+    return $class->_dl_impl(undef, undef);
   }
   elsif(_is_win)
   {
-    return $class->_dl_impl($libname, 0);
+    return $class->_dl_impl($libname, undef);
   }
   elsif(-e $libname)
   {
     return $class->_dl_impl(
       $libname,
-      $flags == 0x01 ? FFI::Platypus::Lang::DL::RTLD_GLOBAL() : 0,
+      $flags == 0x01 ? FFI::Platypus::Lang::DL::RTLD_GLOBAL() : undef,
     );
   }
   else
@@ -52,9 +52,11 @@ sub new
 
 sub _dl_impl
 {
-  my $class = shift;
+  my($class, $path, $flags) = @_;
   require FFI::Platypus::DL;
-  my $handle = FFI::Platypus::DL::dlopen(@_);
+  $flags = FFI::Platypus::DL::RTLD_PLATYPUS_DEFAULT()
+    unless defined $flags;
+  my $handle = FFI::Platypus::DL::dlopen($path, $flags);
   return unless defined $handle;
   bless { impl => 'dl', handle => $handle }, $class;
 }
