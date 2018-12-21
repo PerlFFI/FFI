@@ -2,18 +2,14 @@ use strict;
 use warnings;
 use Test::More;
 use FFI;
+use FFI::Library;
 
-# Load the C and Math libraries
-use lib "./t/lib";
-use Test::FFI::Legacy;
-
-our $libc;
-our $libm;
+my $libc = FFI::Library->new(\$0);
 
 # Function addresses
-my $atoi = address($libc, "atoi");
-my $strlen = address($libc, "strlen");
-my $pow = address($libm, "pow");
+my $atoi = $libc->address("atoi");
+my $strlen = $libc->address("strlen");
+my $pow = $libc->address("pow");
 
 is FFI::call($atoi,   'cip', "12"),         12, 'atoi(12)';
 is FFI::call($atoi,   'cip', "-97"),       -97, 'atoi(-97)';
