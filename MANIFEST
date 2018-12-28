@@ -5,6 +5,7 @@ COPYING
 FFI.xs
 INSTALL
 lib/FFI.pm
+lib/FFI/Callback.pm
 lib/FFI/Library.pm
 Makefile.PL
 MANIFEST			This list of files
