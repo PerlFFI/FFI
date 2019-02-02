@@ -44,7 +44,7 @@ subtest 'test using the Windows API calling conventions' => sub {
   is($buffer, "The quick brown fox jumps over the lazy dog.\0");
 };
 
-subtest 'test closures' = sub {
+subtest 'test closures' => sub {
 
   my $lib = FFI::Library->new(find_lib_or_die( lib => "test", libpath => "t/ffi/_build" ));
 
