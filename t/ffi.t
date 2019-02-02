@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
+use Config;
 use FFI;
 use FFI::CheckLib qw( find_lib_or_die );
 use FFI::Library;
@@ -26,7 +27,11 @@ subtest 'test using the Windows API calling conventions' => sub {
 
   my $lib = FFI::Library->new(find_lib_or_die( lib => "test", libpath => "t/ffi/_build" ));
 
-  my $fill_my_string = $lib->function('fill_my_string', 'sIIp');
+  # honestly this shit makes my head hurt.
+  my $possibly_decorated_name = 'fill_my_string';
+  $possibly_decorated_name .= '@8' if $Config{ptrsize} == 4;
+
+  my $fill_my_string = $lib->function('fill_my_string@8', 'sIIp');
 
   my $buffer = ' ' x 20;
   is($fill_my_string->(20, $buffer), 20);
