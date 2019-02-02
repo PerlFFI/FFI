@@ -3,6 +3,8 @@ Revision history for {{$dist->name}}
 {{$NEXT}}
   - Rewrote new win32 API tests as the old
     ones were not very reliable.
+  - Add `o` type, equivalent to FFI::Platypus
+    `opaque`.
 
 0.05      2018-12-20 21:53:10 -0700
   - Added test for FFI::Library

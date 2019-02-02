@@ -33,6 +33,7 @@ our %typemap = qw(
   d   double
   p   string
   v   void
+  o   opaque
 );
 
 sub _ffi
@@ -146,7 +147,8 @@ values are based on the codes used for the L<pack> function, namely
     L   An unsigned long value.
     f   A single-precision float.
     d   A double-precision float.
-    p   A pointer.
+    p   A pointer to a Perl scalar.
+    o   A opaque pointer, ie, an address.
     v   No value (only valid as a return type).
 
 Note that all of the above codes refer to "native" format values.
