@@ -19,6 +19,8 @@ subtest 'test some common lib C stuff' => sub {
   is FFI::call($atoi,   'cip', "-97"),       -97, 'atoi(-97)';
   is eight_digits(FFI::call($pow,   'cddd', 2, 0.5)),   eight_digits(2**0.5), 'pow(2,0.5)';
   is FFI::call($strlen, 'cIp', "Perl"),      4, 'strlen("Perl")';
+
+  done_testing;
 };
 
 subtest 'test using the Windows API calling conventions' => sub {
@@ -42,6 +44,8 @@ subtest 'test using the Windows API calling conventions' => sub {
   is($fill_my_string->(500, $buffer), 45);
   $buffer = substr($buffer, 0, 45);
   is($buffer, "The quick brown fox jumps over the lazy dog.\0");
+
+  done_testing;
 };
 
 subtest 'test closures' => sub {
@@ -58,6 +62,7 @@ subtest 'test closures' => sub {
 
   is($call_adder->($callback1->addr, 1,2), 3, 'call_addr->($address,1,2) = 3');
 
+  done_testing;
 };
 
 done_testing;
