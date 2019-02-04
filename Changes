@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Installer fixes for windows
 
 0.06      2019-02-02 18:04:59 -0500
   - Rewrote new win32 API tests as the old
