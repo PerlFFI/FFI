@@ -24,16 +24,14 @@ subtest 'test some common lib C stuff' => sub {
 };
 
 subtest 'test using the Windows API calling conventions' => sub {
-  plan skip_all => 'Test requires Windows'
-    unless $^O =~ /^(MSWin32|cygwin)$/;
 
   my $lib = FFI::Library->new(find_lib_or_die( lib => "test", libpath => "t/ffi/_build" ));
 
   # honestly this shit makes my head hurt.
   my $possibly_decorated_name = 'fill_my_string';
-  $possibly_decorated_name .= '@8' if $Config{ptrsize} == 4;
+  $possibly_decorated_name .= '@8' if $Config{ptrsize} == 4 && $^O =~ /^(MSWin32|cygwin)$/i;
 
-  my $fill_my_string = $lib->function('fill_my_string@8', 'sIIp');
+  my $fill_my_string = $lib->function($possibly_decorated_name, 'sIIp');
 
   my $buffer = ' ' x 20;
   is($fill_my_string->(20, $buffer), 20);

@@ -1,6 +1,10 @@
 #if defined(__CYGWIN__) || defined(_WIN32)
+#define STDCALL __stdcall
+#else
+#define STDCALL
+#endif
 
-unsigned int __stdcall
+unsigned int STDCALL
 fill_my_string(unsigned int size, char *buffer)
 {
   static const char *my_string = "The quick brown fox jumps over the lazy dog.";
@@ -17,5 +21,3 @@ fill_my_string(unsigned int size, char *buffer)
   return i+1;
 }
 
-
-#endif
