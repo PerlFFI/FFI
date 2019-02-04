@@ -52,10 +52,11 @@ sub _ffi
 
 sub call
 {
-  my($addr, $signature, @args) = @_;
+  my $addr = shift;
+  my $signature = shift;
   my $ffi = _ffi($signature);
   my($ret_type, @args_types) = map { $typemap{$_} } split //, $signature;
-  $ffi->function($addr => \@args_types => $ret_type)->call(@args);
+  $ffi->function($addr => \@args_types => $ret_type)->call(@_);
 }
 
 sub callback
