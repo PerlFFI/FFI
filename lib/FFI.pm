@@ -81,13 +81,12 @@ sub addr { shift->{addr} }
 
 =head1 SYNOPSIS
 
-    use FFI;
-    $addr = <address of a C function>
-    $signature = <function signature>
-    $ret = FFI::call($addr, $signature, ...);
-
-    $cb = FFI::callback($signature, sub {...});
-    $ret = FFI::call($addr, $signature, $cb->addr, ...);
+ # for a more portable interface see FFI::Library
+ $clib_file = ($^O eq "MSWin32") ? "MSVCRT40.DLL" : "-lc";
+ $clib = DynaLoader::dl_findfile($clib_file);
+ $strlen = DynaLoader::dl_find_symbol($clib, "strlen");
+ $n = FFI::call($strlen, "cIp", $my_string);
+ DynaLoader::dl_free_file($clib);
 
 =head1 DESCRIPTION
 
@@ -180,62 +179,6 @@ pointer type, and obtain any returned value using C<$n = unpack('i',
 $buf);> In the future, better support may be added (but remember that 
 this is intended as a low-level interface!)
 
-=head1 EXAMPLES
-
-It is somewhat difficult to provide examples of using this module in 
-isolation, as it is necessary to (somehow) obtain the address of a 
-function to call. In general, this task is delegated to higher-level 
-wrapper modules.
-
-However, the standard C<DynaLoader> module returns symbol references via 
-the C<DynaLoader::dl_find_symbol()> function. While these references are 
-not documented as being addresses, in practice, they seem to be. Code to 
-obtain the address of various C library functions can be built around 
-this
-
-    $clib_file = ($^O eq "MSWin32") ? "MSVCRT40.DLL" : "-lc";
-    $clib = DynaLoader::dl_findfile($clib_file);
-    $strlen = DynaLoader::dl_find_symbol($clib, "strlen");
-    $n = FFI::call($strlen, "cIp", $my_string);
-    DynaLoader::dl_free_file($clib);
-
-Clearly, code like this needs to be encapsulated in a module of some 
-form...
-
-NOTE: In fact, the DynaLoader interface has problems in ActiveState 
-Perl, and probably in other binary distributions of Perl. (The issue is 
-related to the way in which the DynaLoader module is built, and may be 
-addressed in future versions of Perl). In the interim, the higher-level 
-wrapper module FFI::Library does not use DynaLoader on Win32 - it uses 
-the (deprecated, but still available) Win32::LoadLibrary and related 
-calls.
-
-=head1 TODO
-
-=over 4
-
-=item *
-
-Improve support for returning pointers to things other than 
-null-terminated strings.
-
-=item *
-
-Possibly, improve support for passing pointers to "native" types.
-
-=back
-
-=head1 CAVEATS
-
-Substantial portions of the code for this module (the underlying FFI 
-code) are licensed under the GNU General Public License. Under the terms 
-of that license, my understanding is that this module has to be 
-distributed under that same license.
-
-My personal preference would be to distribute this module under the same 
-terms as Perl. However, I understand that this is not possible, given 
-the licensing of the FFI code.
-
 =head1 SUPPORT
 
 Please open any support tickets with this project's GitHub repository 
@@ -260,30 +203,4 @@ Portable functions for finding libraries.
 Platypus is another FFI interface based on libffi.  It has a more 
 extensive feature set, and libffi has a less restrictive license.
 
-=item L<Win32::API>
-
-An FFI interface for Perl on Microsoft Windows.
-
 =back
-
-=head1 AUTHOR
-
-Paul Moore, C<< <gustav@morpheus.demon.co.uk> >> is the original author
-of L<FFI>.
-
-Mitchell Charity C<< <mcharity@vendian.org> >> and
-Reini Urban C<< <RURBAN@cpan.org> >> contributed fixes.
-
-Anatoly Vorobey C<< <avorobey@pobox.com> >> and Gaal Yahas C<<
-<gaal@forum2.org> >> are former maintainers.
-
-Graham Ollis C<< <plicease@cpan.org >> is the current maintainer
-
-=head1 COPYRIGHT AND LICENSE
- 
-This software is copyright (c) 1999 by Paul Moore.
-  
-This is free software; you can redistribute it and/or modify it under
-the terms of the GNU General Public License
-
-=cut

@@ -27,7 +27,15 @@ of [FFI::Platypus](https://metacpan.org/pod/FFI::Platypus), it will likely be fa
 
 # AUTHOR
 
-Graham Ollis <plicease@cpan.org>
+Original author: Paul Moore <gustav@morpheus.demon.co.uk>
+
+Current maintainer: Graham Ollis <plicease@cpan.org>
+
+Contributors:
+
+Anatoly Vorobey <avorobey@pobox.com>
+
+Gaal Yahas <gaal@forum2.org>
 
 # COPYRIGHT AND LICENSE
 

@@ -123,10 +123,17 @@ sub DESTROY
 
 =head1 SYNOPSIS
 
+ # call function from arbitrary dynamic library
  use FFI::Library;
  $lib = FFI::Library->new("mylib");
  $fn = $lib->function("fn", "signature");
  $ret = $fn->(...);
+
+ # call function from libc
+ $clib_file = ($^O eq "MSWin32") ? "MSVCRT40.DLL" : "-lc";
+ $clib = FFI::Library->new($clib_file);
+ $strlen = $clib->function("strlen", "cIp");
+ $n = $strlen->($my_string);
 
 =head1 DESCRIPTION
 
@@ -196,24 +203,3 @@ extensive feature set, and libffi has a less restrictive license.
 An FFI interface for Perl on Microsoft Windows.
 
 =back
-
-=head1 AUTHOR
-
-Paul Moore, C<< <gustav@morpheus.demon.co.uk> >> is the original author
-of L<FFI>.
-
-Mitchell Charity C<< <mcharity@vendian.org> >> contributed fixes.
-
-Anatoly Vorobey C<< <avorobey@pobox.com> >> and Gaal Yahas C<<
-<gaal@forum2.org> >> are the current maintainers.
-
-Graham Ollis C<< <plicease@cpan.org >> is the current maintainer
-
-=head1 LICENSE
-
-This software is copyright (c) 1999 by Paul Moore.
-
-This is free software; you can redistribute it and/or modify it under
-the terms of the GNU General Public License
-
-=cut
