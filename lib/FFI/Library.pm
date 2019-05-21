@@ -137,12 +137,14 @@ sub DESTROY
 
 =head1 DESCRIPTION
 
+B<NOTE>: Newer and better maintained FFI modules such as L<FFI::Platypus>
+provide more functionality and so it is strongly recommend that you use
+one of them for new projects and even consider migrating to one of
+them for existing projects.
+
 This module provides access from Perl to functions exported from dynamically
 linked libraries. Functions are described by C<signatures>, for details of
 which see the L<FFI> module's documentation.
-
-Newer and better maintained FFI modules such as L<FFI::Platypus> provide more
-functionality and should probably be considered for new projects.
 
 =head1 CONSTRUCTOR
 
