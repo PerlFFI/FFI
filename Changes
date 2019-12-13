@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Fixes for Visual C++
 
 1.14      2019-02-10 11:46:43 -0500
   - New FFI::Platypus / libffi based implementation
