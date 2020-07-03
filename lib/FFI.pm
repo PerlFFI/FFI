@@ -184,7 +184,7 @@ this is intended as a low-level interface!)
 Please open any support tickets with this project's GitHub repository 
 here:
 
-L<https://github.com/Perl5-FFI/FFI/issues>
+L<https://github.com/PerlFFI/FFI/issues>
 
 =head1 SEE ALSO
 
