@@ -42,7 +42,7 @@ sub new
     require DynaLoader;
     my $so = DynaLoader::dl_findfile($libname) || $libname;
     my $handle = DynaLoader::dl_load_file($so, $flags || 0);
-    return unless $handle;
+    return unless $handle;  ## no critic (Freenode::EmptyReturn)
     return bless {
       impl => 'dynaloader',
       handle => $handle,
@@ -75,7 +75,7 @@ sub address
   }
   elsif($self->{impl} eq 'null')
   {
-    return;
+    return;  ## no critic (Freenode::EmptyReturn)
   }
   else
   {
