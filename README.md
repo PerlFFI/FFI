@@ -1,15 +1,17 @@
-# FFI [![Build Status](https://secure.travis-ci.org/Perl5-FFI/FFI.png)](http://travis-ci.org/Perl5-FFI/FFI)
+# FFI [![Build Status](https://travis-ci.org/PerlFFI/FFI.svg)](http://travis-ci.org/PerlFFI/FFI)
 
 Perl Foreign Function Interface based on libffi
 
 # SYNOPSIS
 
-    # for a more portable interface see FFI::Library
-    $clib_file = ($^O eq "MSWin32") ? "MSVCRT40.DLL" : "-lc";
-    $clib = DynaLoader::dl_findfile($clib_file);
-    $strlen = DynaLoader::dl_find_symbol($clib, "strlen");
-    $n = FFI::call($strlen, "cIp", $my_string);
-    DynaLoader::dl_free_file($clib);
+```perl
+# for a more portable interface see FFI::Library
+$clib_file = ($^O eq "MSWin32") ? "MSVCRT40.DLL" : "-lc";
+$clib = DynaLoader::dl_findfile($clib_file);
+$strlen = DynaLoader::dl_find_symbol($clib, "strlen");
+$n = FFI::call($strlen, "cIp", $my_string);
+DynaLoader::dl_free_file($clib);
+```
 
 # DESCRIPTION
 
@@ -28,14 +30,18 @@ be passed to C code.
 
 ## call
 
-    my $ret = FFI::call($address, $signature, @arguments);
+```perl
+my $ret = FFI::call($address, $signature, @arguments);
+```
 
 Call the function at the given `$address` with the given `$signature`>
 (see below) and the given `@arguments`.
 
 ## callback
 
-    my $address = FFI::callback($signature, \&subref);
+```perl
+my $address = FFI::callback($signature, \&subref);
+```
 
 Creates a c callback that will call a Perl subref.
 
@@ -46,8 +52,10 @@ is a string which specifies the function's return type, argument types
 and calling convention. The first character of the string is the 
 function's calling convention. This is one of
 
-    s   The standard calling convention for dynamically linked functions
-    c   The calling convention used by C functions
+```perl
+s   The standard calling convention for dynamically linked functions
+c   The calling convention used by C functions
+```
 
 Note that on many platforms, these two calling conventions may be 
 identical. On the Windows platform, the `s` code corresponds to the 
@@ -60,19 +68,21 @@ The remaining characters of the string are the return type of the
 function, followed by the argument types, in left-to-right order. Valid 
 values are based on the codes used for the [pack](https://metacpan.org/pod/pack) function, namely
 
-    c   A signed char value.
-    C   An unsigned char value.
-    s   A signed short value.
-    S   An unsigned short value.
-    i   A signed integer value.
-    I   An unsigned integer value.
-    l   A signed long value.
-    L   An unsigned long value.
-    f   A single-precision float.
-    d   A double-precision float.
-    p   A pointer to a Perl scalar.
-    o   A opaque pointer, ie, an address.
-    v   No value (only valid as a return type).
+```
+c   A signed char value.
+C   An unsigned char value.
+s   A signed short value.
+S   An unsigned short value.
+i   A signed integer value.
+I   An unsigned integer value.
+l   A signed long value.
+L   An unsigned long value.
+f   A single-precision float.
+d   A double-precision float.
+p   A pointer to a Perl scalar.
+o   A opaque pointer, ie, an address.
+v   No value (only valid as a return type).
+```
 
 Note that all of the above codes refer to "native" format values.
 
@@ -92,8 +102,10 @@ strings are null-terminated for you. To pass pointers to structures, use
 [pack](https://metacpan.org/pod/pack). To pass an arbitrary block of memory, use something like the 
 following:
 
-    $buf = ' ' x 100;
-    # Use $buf via a 'p' parameter as a 100-byte memory block
+```
+$buf = ' ' x 100;
+# Use $buf via a 'p' parameter as a 100-byte memory block
+```
 
 At the present time, there is no direct support for passing pointers to 
 'native' types (like int). To work around this, use `$buf = pack('i', 
@@ -107,7 +119,7 @@ this is intended as a low-level interface!)
 Please open any support tickets with this project's GitHub repository 
 here:
 
-[https://github.com/Perl5-FFI/FFI/issues](https://github.com/Perl5-FFI/FFI/issues)
+[https://github.com/PerlFFI/FFI/issues](https://github.com/PerlFFI/FFI/issues)
 
 # SEE ALSO
 
