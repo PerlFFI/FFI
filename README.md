@@ -1,4 +1,4 @@
-# FFI [![Build Status](https://travis-ci.org/PerlFFI/FFI.svg)](http://travis-ci.org/PerlFFI/FFI)
+# FFI ![linux](https://github.com/PerlFFI/FFI/workflows/linux/badge.svg)
 
 Perl Foreign Function Interface based on libffi
 
