@@ -1,2 +1,4 @@
 /FFI-*
 /.build
+*.old
+*.orig
